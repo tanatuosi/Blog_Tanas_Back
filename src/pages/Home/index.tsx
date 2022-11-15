@@ -1,8 +1,6 @@
 import { useMount, useSafeState, useTitle } from 'ahooks';
 import React from 'react';
 import { connect } from 'react-redux';
-
-import PageTitle from '../../components/PageTitle';
 import { setNavShow } from '../../redux/actions';
 import { siteTitle } from '../../utils/constant';
 import useTop from '../../utils/hooks/useTop';
@@ -22,20 +20,8 @@ const Home: React.FC<Props> = ({ setNavShow }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   setNavShow && useTop(setNavShow);
 
-  const [poem, setPoem] = useSafeState('');
-  useMount(() => {
-    getPoem.load(
-      (res: {
-        data: {
-          content: string;
-        };
-      }) => setPoem(res.data.content)
-    );
-  });
-
   return (
     <>
-      <PageTitle title={siteTitle} desc={poem || ''} className={s.homeTitle} />
       <div className={s.body}>
         <Section />
         {/* <Aside /> */}

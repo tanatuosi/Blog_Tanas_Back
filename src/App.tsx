@@ -12,6 +12,7 @@ import Nav from './components/Nav';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
 import 'antd/dist/antd.min.css';
+import MenuPost from './components/MenuPost';
 
 
 
@@ -34,7 +35,10 @@ const App: React.FC<Props> = ({ mode, setMode }) => {
     <div className={classNames(styles.AppBox, bgClasses[mode!])}>
     {/* <div className={classNames(styles.AppBox, bgClasses[mode!])}> */}
       <Nav />
-      <Main />
+      <div className={styles.main}>
+        <MenuPost />
+        <Main />
+      </div>
       <Footer />
       <BackToTop />
     </div>

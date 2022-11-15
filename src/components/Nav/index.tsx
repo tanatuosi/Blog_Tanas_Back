@@ -8,7 +8,8 @@ import {
   } from 'ahooks';
 import {
     BgColorsOutlined,
-    SettingOutlined
+    SettingOutlined,
+    HomeOutlined
   } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -52,10 +53,12 @@ const Nav: React.FC<Props> = ({ navShow, setNavShow, mode, setMode }) => {
     }, [mode]);
 
     return (
-        <div className={s.outside}>
+        <div>
         <nav className={s.Nav}>
             <div className={s.left_content}>
-                <div className={s.mian_image} onClick={() => navigate('/')} />
+                <div className={s.homeBtn} onClick={() => navigate('/')}>
+                    <HomeOutlined />
+                </div>
             </div>
             <div className={s.right_content}>
                 <div className={s.homeBtn} onClick={() => navigate('/')}>
