@@ -14,13 +14,14 @@ import s from './index.module.scss';
 import PostCard from './PostCard';
 
 interface theAtc {
-  classes: string;
+  category: string;
   content: string;
-  date: number;
+  date: object;
   tags: string[];
   title: string;
   titleEng: string;
   url: string;
+  imgurl: string;
   _id: string;
   _openid: string;
 }
@@ -50,9 +51,11 @@ const Section: React.FC<Props> = ({ artSum }) => {
     }
   );
 
+  console.log(data);
+
   return (
     <section className={s.section}>
-      {data?.data.map(({ _id, title, content, date, tags, titleEng }: theAtc) => (
+      {data?.data.map(({ _id, title, content, date, tags, titleEng, imgurl }: theAtc) => (
         <PostCard
           key={_id}
           title={title}
@@ -60,6 +63,7 @@ const Section: React.FC<Props> = ({ artSum }) => {
           date={date}
           tags={tags}
           loading={loading}
+          imgurl={imgurl}
           onClick={() => navigate(`/post?title=${encodeURIComponent(titleEng)}`)}
         />
       ))}

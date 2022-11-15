@@ -2,7 +2,7 @@ import { Skeleton } from 'antd';
 import classNames from 'classnames';
 import React, { MouseEventHandler, ReactNode } from 'react';
 
-import s from './index.scss';
+import s from './index.module.scss';
 
 interface Props {
   className?: string;

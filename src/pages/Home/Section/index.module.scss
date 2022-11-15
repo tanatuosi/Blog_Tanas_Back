@@ -1,7 +1,7 @@
 @import '../../../styles/base.scss';
 
 .section {
-  width: calc(100% - #{$asideWidth});
+  width: calc(100%);
   padding-right: $space;
   box-sizing: border-box;
 }

@@ -31,7 +31,7 @@ const App: React.FC<Props> = ({ mode, setMode }) => {
   });
   
   return (
-    <div className={classNames(styles.AppBox, bgClasses[0])}>
+    <div className={classNames(styles.AppBox, bgClasses[mode!])}>
     {/* <div className={classNames(styles.AppBox, bgClasses[mode!])}> */}
       <Nav />
       <Main />
