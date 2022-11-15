@@ -1,0 +1,104 @@
+
+@import '../../styles/base.scss';
+
+.body {
+  display: flex;
+  margin-top: 80px;
+  .content{
+    height: 1800px;
+    text-align:center;
+    opacity: 0.95;
+    width: 1600px;
+    .details{
+      // height: 500px;
+      display: flex;
+      text-align: left;
+      flex-flow: column nowrap;
+      margin-top: 20px;
+      background-color: white;
+      opacity: 0.95;
+
+      .title{
+        display: flex;
+        text-align: left;
+        margin-top: 20px;
+        margin-left: 150px;
+        width: 1300px;
+        height: 50px;
+        
+        .title_textarea{
+          width: 1100px;
+          font-size: 22px;
+        }
+      }
+
+      .coverdescrible{
+        margin-top: 20px;
+        margin-left: 150px;
+        width: 1300px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: left;
+        .covercontent{
+          display: flex;
+          flex-flow: column wrap;
+          .cover{
+            margin-bottom: 20px;
+            .ant-upload-list-item {
+              float: left;
+              width: 200px;
+              margin-right: 8px;
+            }
+          }
+          .describle{
+            .describletextarea{
+              width: 1100px;
+              height: 120px;
+            }
+          }
+        }
+      }
+      .tags{
+        margin-top: 20px;
+        margin-left: 150px;
+        width: 1300px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: left;
+        .tagsselect{
+          width: 1100px;
+          margin-left: 40px;
+
+        }
+
+      }
+      .sort{
+        height: 100px;
+      }
+      .access{
+        height: 100px;
+      }
+      .confirm{
+        height: 100px;
+        margin-top: 20px;
+        margin-left: 1160px;
+        .save{
+          margin-right: 20px;
+        }  
+      }
+    }
+  }
+  
+}
+
+.upload-list-inline .ant-upload-list-item {
+  float: left;
+  width: 200px;
+  margin-right: 8px;
+}
+
+.upload-list-inline [class*='-upload-list-rtl'] .ant-upload-list-item {
+  float: right;
+}
+
+

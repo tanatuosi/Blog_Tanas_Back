@@ -1,0 +1,110 @@
+@import '../../styles/base.scss';
+@import '../../styles/style.scss';
+
+.Nav{
+    position: relative;
+    height: 40px;
+    justify-content: center;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    // background-color: aquamarine;
+    justify-content: space-between;
+    .left_content{
+        height: 40px;
+        width: 100px;
+        .mian_image{
+            width: 100px;
+            height: 40px;
+            margin-top: 10px;
+            background-image: url('../../imags/main.png');
+        }
+    }
+    .right_content{
+        height: 40px;
+        width: 700px;
+        display: flex;
+        flex-flow: row-reverse wrap;
+        align-items: center;
+    }
+}
+
+.homeBtn{
+    // display: flex;
+    width: 60px;
+    height: 35px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 14px;
+    font-weight: 700;
+    margin-right: 20px;
+    margin-top: 10px;
+    user-select: none;
+    @extend .hover
+}
+
+
+.outside{
+    width: 90%;
+    margin: 0 auto;
+    // background-color: aquamarine;
+}
+
+.homeAndAdmin {
+    @extend .homeBtn;
+    // position: absolute;
+    // top: 50%;
+    // right: 0;
+    // transform: translate(0, -50%);
+    position: relative;
+    font-size: 26px;
+    width: 60px;
+  }
+
+.modeBtn {
+    @extend .homeAndAdmin;
+    // right: 100px;
+    // margin-right: 0;
+
+    .modeOpions {
+      position: absolute;
+      left: 50%;
+      top: -180px;
+      transform: translate(-50%, 0);
+      width: 80px;
+      background-color: $themeColor1;
+      border-radius: 14px;
+      padding: 10px;
+      z-index: 0;
+      @extend .trans;
+
+      .modeItem {
+        height: 40px;
+        background-color: $themeColor;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        @extend .trans;
+        color: #fff;
+      }
+      .modeItem1,
+      .modeItem2 {
+        color: #000;
+      }
+
+      .modeItem:last-child {
+        margin-bottom: 0;
+      }
+      .modeItem:hover {
+        transform: scale(1.07);
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+      }
+    }
+  }
+  .modeBtn:hover .modeOpions {
+    top: 45px;
+  }
