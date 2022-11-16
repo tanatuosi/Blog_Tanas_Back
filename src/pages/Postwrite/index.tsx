@@ -85,7 +85,7 @@ const Postwrite: React.FC<Props> = (props:Props) => {
             </div>
             <div className={s.details}>
               <div className={s.title}>
-                <div>请输入标题：</div>
+                <div>{'英文标题：'+' '}</div>
                 <TextArea className={s.title_textarea} placeholder="请输入标题" />
               </div>
               <div className={s.coverdescrible}>
@@ -119,17 +119,19 @@ const Postwrite: React.FC<Props> = (props:Props) => {
                 <div>权限：</div>
                 <TagSelect className={s.tagsselect} />
               </div>
-              <div className={s.confirm}>
-                <Button className={s.save}>
-                  保存草稿
-                </Button>
-                <Button>
-                  发布
-                </Button>
-              </div>
             </div>
-
         </div>
+            <div className={s.confirm}>
+              <Button className={s.save}>
+                保存草稿
+              </Button>
+              <Button className={s.post}>
+                读取草稿
+              </Button>
+              <Button className={s.post}>
+                发布
+              </Button>
+            </div>
       </div>
     </>
   );

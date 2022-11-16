@@ -5,7 +5,7 @@
     position: relative;
     height: 55px;
     justify-content: center;
-    background-color: rgb(194, 209, 223);
+    background-color: rgb(124 179 231);
     margin: 0 auto;
     display: flex;
     flex-flow: row wrap;
@@ -41,9 +41,11 @@
     border-radius: 14px;
     font-weight: 700;
     margin-right: 20px;
-    margin-top: 10px;
+    margin-top: 5px;
     user-select: none;
-    @extend .hover
+    transition: all 0.3s !important;
+    cursor: pointer;
+
 }
 
 
@@ -109,4 +111,17 @@
   }
   .modeBtn:hover .modeOpions {
     top: 45px;
+  }
+
+  .nametext1{
+    font-size: 23px;
+    margin-top: 10px;
+    font-family: fantasy;
+  }
+
+  .nametext2{
+    font-size: 23px;
+    margin-top: 10px;
+    font-family: cursive;
+    
   }

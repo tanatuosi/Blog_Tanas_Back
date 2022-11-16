@@ -23,7 +23,7 @@ const Home: React.FC<Props> = ({ setNavShow }) => {
   return (
     <>
       <div className={s.body}>
-        <Section />
+        {/* <Section /> */}
         {/* <Aside /> */}
       </div>
     </>

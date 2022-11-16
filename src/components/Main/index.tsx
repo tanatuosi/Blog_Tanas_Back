@@ -21,7 +21,7 @@ const Postwrite = lazy(() => import(/* webpackPrefetch:true */ '../../pages/Post
 const Main: React.FC = () => {
     return (
         <main className={s.main}>
-        <div className={s.center}>
+
             <Suspense fallback={<></>}>
               <Routes>
                 <Route path='/' element={<Home />} />
@@ -42,7 +42,6 @@ const Main: React.FC = () => {
                 <Route path='*' element={<Navigate to='/' replace />} /> */}
               </Routes>
             </Suspense>
-        </div>
       </main>
     )
 }

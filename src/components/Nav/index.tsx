@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './index.module.scss';
+import { Avatar, Badge } from 'antd';
 import {
     useEventListener,
     useLocalStorageState,
@@ -9,7 +10,8 @@ import {
 import {
     BgColorsOutlined,
     SettingOutlined,
-    HomeOutlined
+    HomeOutlined,
+    UserOutlined 
   } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -61,37 +63,14 @@ const Nav: React.FC<Props> = ({ navShow, setNavShow, mode, setMode }) => {
                 </div>
             </div>
             <div className={s.right_content}>
-                <div className={s.homeBtn} onClick={() => navigate('/')}>
-                    <SettingOutlined />
+                <div className={s.homeBtn} onClick={() => navigate('/user')}>
+                    <Avatar shape="square" icon={<UserOutlined />} />
                 </div>
-                <div className={s.modeBtn} onClick={() => navigate('/')}>
-                    <BgColorsOutlined />
-                    <div className={s.modeOpions}>
-                        {modeOptions.map((backgroundColor, index) => (
-                            <div 
-                            key={index} 
-                            style={{backgroundColor: backgroundColor}}
-                            className={classNames(s.modeItem, s[`modeItem${index}`])}
-                            onClick={() => setMode?.(index)}
-                            >
-                            </div>
-                        ))}
-                    </div>
+                <div className={s.nametext1}>
+                    {'Tanas'}
                 </div>
-                <div className={s.homeBtn} onClick={() => navigate('/')}>
-                    建站
-                </div>
-                <div className={s.homeBtn} onClick={() => navigate('/')}>
-                    关于
-                </div>
-                <div className={s.homeBtn} onClick={() => navigate('/')}>
-                    图库
-                </div>
-                <div className={s.homeBtn} onClick={() => navigate('/postwrite')}>
-                    创作
-                </div>
-                <div className={s.homeBtn} onClick={() => navigate('/')}>
-                    文章
+                <div className={s.nametext2}>
+                    {'晚上好：'}
                 </div>
                 
             </div>
