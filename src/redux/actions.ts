@@ -5,8 +5,15 @@ import {
   SET_LINK,
   SET_MODE,
   SET_NAME,
-  SET_NAV_SHOW
+  SET_NAV_SHOW,
+  SET_LOGIN
 } from './constant';
+
+// 登录
+export const setLogin = (data: boolean) => ({
+  type: SET_LOGIN,
+  data,
+});
 
 export const setNavShow = (data: boolean) => ({
   type: SET_NAV_SHOW,

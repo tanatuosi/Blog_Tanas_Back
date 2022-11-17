@@ -8,3 +8,4 @@ export const SET_LINK = 'setLink';
 export const SET_AVATAR = 'setAvatar';
 
 export const SET_MODE = 'setMode';
+export const SET_LOGIN = 'setLogin';
