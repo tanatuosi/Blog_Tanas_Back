@@ -5,6 +5,10 @@ import { setLogin } from '../../../redux/actions';
 import { connect } from 'react-redux';
 import s from './index.module.scss';
 import { app } from '../../../utils/cloudBase';
+import { Input } from 'antd';
+import {
+  UserOutlined 
+} from '@ant-design/icons';
 
 interface Props {
 }
@@ -30,6 +34,10 @@ const LoginBox: React.FC<Props> = (props) => {
 
   return (
     <>
+      <div className={s.lpgin}>
+        <Input className={s.useemail} placeholder="default size" prefix={<UserOutlined />} />
+        <Input.Password className={s.usepwd} placeholder="input password" />
+      </div>
     </>
   );
 };
