@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
 import 'antd/dist/antd.min.css';
 import MenuPost from './components/MenuPost';
+import Login from './pages/Login'
 
 
 
@@ -30,17 +31,27 @@ const App: React.FC<Props> = ({ mode, setMode }) => {
       setMode?.(localMode);
     }
   });
+
+  let isLogin = false;
+
+  if( isLogin ){
+    return (
+      <div className={classNames(styles.AppBox, bgClasses[mode!])}>
+      {/* <div className={classNames(styles.AppBox, bgClasses[mode!])}> */}
+        <Nav />
+        <div className={styles.main}>
+          <MenuPost />
+          <Main />
+        </div>
+        <Footer />
+        <BackToTop />
+      </div>
+    )
+  }
   
   return (
-    <div className={classNames(styles.AppBox, bgClasses[mode!])}>
-    {/* <div className={classNames(styles.AppBox, bgClasses[mode!])}> */}
-      <Nav />
-      <div className={styles.main}>
-        <MenuPost />
-        <Main />
-      </div>
-      <Footer />
-      <BackToTop />
+    <div>
+      <Login />
     </div>
   )
 } 

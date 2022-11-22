@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 import cloudbase from '@cloudbase/js-sdk';
 import { setLogin } from '../../../redux/actions';
 import { connect } from 'react-redux';
-import s from './index.module.scss';
 import { app } from '../../../utils/cloudBase';
 import { Input } from 'antd';
 import {
   UserOutlined 
 } from '@ant-design/icons';
+import s from './index.module.scss';
 
 interface Props {
 }
@@ -34,7 +34,7 @@ const LoginBox: React.FC<Props> = (props) => {
 
   return (
     <>
-      <div className={s.lpgin}>
+      <div className={s.login}>
         <Input className={s.useemail} placeholder="default size" prefix={<UserOutlined />} />
         <Input.Password className={s.usepwd} placeholder="input password" />
       </div>

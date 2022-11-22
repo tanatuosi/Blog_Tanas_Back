@@ -20,7 +20,7 @@ const LoginBg: React.FC<Props> = (props:Props) => {
 
   return (
     <>
-      <div className={s.starts}>
+      <div className={s.stars}>
         <div></div>
       </div>
     </>
