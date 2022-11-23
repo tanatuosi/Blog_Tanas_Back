@@ -1,3 +1,31 @@
 .login{
-    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top:-125px;
+    margin-left: -250px;
+    width: 500px;
+    height: 250px;
+    border: 1px snow solid;
+    background-color: white;
+    border-radius: 10px;
+    .loginbox{
+        width: 400px;
+        margin: auto;
+        .useemail{
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+    }
+    .loginbutton{
+        width: 185px;
+        margin: 0 auto;
+        margin-top: 40px;
+        .visitorloginin{
+            margin-right: 20px;
+        }
+        .managerloginin{
+
+        }
+    }
 }

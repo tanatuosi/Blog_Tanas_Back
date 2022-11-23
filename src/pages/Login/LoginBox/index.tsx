@@ -4,9 +4,10 @@ import cloudbase from '@cloudbase/js-sdk';
 import { setLogin } from '../../../redux/actions';
 import { connect } from 'react-redux';
 import { app } from '../../../utils/cloudBase';
-import { Input } from 'antd';
+import { Button, Input } from 'antd';
 import {
-  UserOutlined 
+  UserOutlined,
+  SettingOutlined 
 } from '@ant-design/icons';
 import s from './index.module.scss';
 
@@ -35,8 +36,14 @@ const LoginBox: React.FC<Props> = (props) => {
   return (
     <>
       <div className={s.login}>
-        <Input className={s.useemail} placeholder="default size" prefix={<UserOutlined />} />
-        <Input.Password className={s.usepwd} placeholder="input password" />
+        <div className={s.loginbox}>
+          <Input className={s.useemail} placeholder="input email" prefix={<UserOutlined />} />
+          <Input.Password className={s.usepwd} placeholder="input password" prefix={<SettingOutlined />} />
+        </div>
+        <div className={s.loginbutton}>
+          <Button className={s.visitorloginin}>游客登录</Button>
+          <Button className={s.managerloginin}>登录</Button>   
+        </div>
       </div>
     </>
   );
