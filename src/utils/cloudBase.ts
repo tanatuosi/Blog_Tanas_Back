@@ -7,10 +7,9 @@ export const app = cloudbase.init({
     env: 'hello-cloudbase-4gwpicbvc7a2c471' // 您的环境id
   })
 
-export const auth = app.auth({ persistence: 'local' }).signInWithEmailAndPassword('1670667876@qq.com', 'qiandaohu123')
-.then(() => {
-  // 发送验证邮件成功
-});;
+  export const auth = app.auth({
+    persistence: 'local',
+});
 
 export const db = app.database();
 

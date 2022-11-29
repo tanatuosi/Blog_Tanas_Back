@@ -15,7 +15,7 @@ import {
   } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { setMode, setNavShow } from '../../redux/actions';
+import { setMode, setNavShow, setLogin } from '../../redux/actions';
 import { storeState } from '../../redux/interface';
 import { modeMap, modeMapArr } from '../../utils/modeMap';
 import { useLinkList } from './config';
@@ -26,17 +26,25 @@ interface Props {
     setNavShow?: Function;
     mode?: number;
     setMode?: Function;
+    setLogin: Function;
   }
 
   const bodyStyle = window.document.getElementsByTagName('body')[0].style;
 
 //文章 创作 日志 关于 主题切换 搜索功能 后台
-const Nav: React.FC<Props> = ({ navShow, setNavShow, mode, setMode }) => {
+const Nav: React.FC<Props> = ({ navShow, setNavShow, mode, setMode, setLogin }) => {
     const navigate = useNavigate();
     const [_, setLocalMode] = useLocalStorageState('localMode');
     const { navArr, secondNavArr } = useLinkList();
 
     const modeOptions = ['rgb(19, 38, 36)', 'rgb(110, 180, 214)', 'rgb(171, 194, 208)'];
+
+    const exitUser = () => {
+      // 清空本地数据
+      localStorage.clear();
+      // 改变登录状态
+      setLogin(false);
+    }
 
     useEventListener(
         'mousewheel',
@@ -66,7 +74,7 @@ const Nav: React.FC<Props> = ({ navShow, setNavShow, mode, setMode }) => {
                 <div className={s.homeBtn} onClick={() => navigate('/user')}>
                     <Avatar shape="square" icon={<UserOutlined />} />
                 </div>
-                <div className={s.nametext1}>
+                <div onClick={exitUser} className={s.nametext1}>
                     {'Tanas'}
                 </div>
                 <div className={s.nametext2}>
@@ -84,5 +92,5 @@ export default connect(
       navShow: state.navShow,
       mode: state.mode
     }),
-    { setNavShow, setMode }
+    { setNavShow, setMode, setLogin }
   )(Nav);
