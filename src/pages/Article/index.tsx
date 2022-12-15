@@ -35,6 +35,59 @@ const Article: React.FC<Props> = ({artSum, setArtSum}) => {
     const [defaultContent, setDefaultContent] = useState('');
     const [content, setContent] = useState('');
 
+    interface titleSelectinterface {
+        label: String;
+        value: Number;
+    }
+
+    interface tagsSelectinterface {
+        label: String;
+        value: Number;
+    }
+
+    interface classSelectinterface {
+        label: String;
+        value: Number;
+    }
+
+    //title列表
+    const titleOptiion:titleSelectinterface[] = [];
+
+    //tags列表
+    const tagsOptiion:tagsSelectinterface[] = [];
+
+    //title列表
+    const classOptiion:classSelectinterface[] = [];
+
+    //获取title列表
+    const getTiltleOption = (artTitle: any) => {
+        for(let i = 0 ; i < artSum.length ; i++)
+            titleOptiion[0] = {
+                label: artTitle[0].title,
+                value: artTitle[0].id
+            }  
+    }
+
+    //获取title列表 这里只是暂时这么写，后面需要补充
+    const getTagsOption = (artTitle: any) => {
+        for(let i = 0 ; i < artSum.length ; i++)
+            tagsOptiion[0] = {
+                label: artTitle[0].tags,
+                value: artTitle[0].tags
+            }  
+    }
+
+    //获取title列表，这里只是暂时这么写，后面需要补充
+    const getClassOption = (artTitle: any) => {
+        for(let i = 0 ; i < artSum.length ; i++)
+            classOptiion[0] = {
+                label: artTitle[0].title,
+                value: artTitle[0].title
+            }  
+    }
+
+
+
     //这里只需要获取文章名字，文章英文名字，文章id就好
     const getArticle = () => {
         db.collection('articles')
@@ -87,11 +140,51 @@ const Article: React.FC<Props> = ({artSum, setArtSum}) => {
     };
 
     useEffect(() => {
-        getArticle();       
+        getArticle();
+        getTiltleOption(artSum);
+        getTagsOption(artSum);
+        getClassOption(artSum);
     }, [])
     return (
-        <div className={s.loginPage}>
-            <div />
+        <div className={s.main}>
+            <div className={s.header}>
+                <Select
+                    showSearch
+                    placeholder="Select a person"
+                    optionFilterProp="children"
+                    // onChange={onChange}
+                    // onSearch={onSearch}
+                    filterOption={(input, option) =>
+                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                    }
+                    options={titleOptiion}
+                />
+                <Select
+                    showSearch
+                    placeholder="Select a person"
+                    optionFilterProp="children"
+                    // onChange={onChange}
+                    // onSearch={onSearch}
+                    filterOption={(input, option) =>
+                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                    }
+                    options={tagsOptiion}
+                />
+                <Select
+                    showSearch
+                    placeholder="Select a person"
+                    optionFilterProp="children"
+                    // onChange={onChange}
+                    // onSearch={onSearch}
+                    filterOption={(input, option) =>
+                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                    }
+                    options={classOptiion}
+                />
+            </div>
+            <div className={s.body}>
+                    
+            </div>
             <div />
         </div>
     );
