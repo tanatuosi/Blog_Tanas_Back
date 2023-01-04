@@ -34,7 +34,7 @@ const LoginBg: React.FC<Props> = (props:Props) => {
     <div key={index} className={s.star} style={{transformOrigin: `0 0 ${number.thisDistance}px` ,transform: `translate3d(0,0,-${number.thisDistance}px) rotateY(${(Math.random() * 360)}deg) 
     rotateX(${(Math.random() * -50)}deg) scale(${number.speed},${number.speed})` }}></div>
   );
-  console.log(listItems[0]);
+  // console.log(listItems[0]);
 
   useEffect(() => {
   }, []);

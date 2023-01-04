@@ -3,8 +3,8 @@
 
 .body {
   display: flex;
-  margin-left: 400px;
   width: 100%;
+  justify-content: center;
   // margin-top: 80px;
   .content{
     height: 1600px;
@@ -98,22 +98,25 @@
 }
 
 .confirm{
+  display: flex;
   background-color: rgb(191 217 241);;
   width: 100%;
   position: fixed;
+  left: 227px;
+  justify-content: center;
   bottom: 0;
-  height: 64px;
-  margin-left: -656px;
+  height: 50px;
+
   .save{
     // border-radius: 0.2;
-    height: 50px;
+    height: 35px;
     font-size: 16px;
     margin-top: 8px;
-    margin-left: 1800px;
+    // margin-left: 1800px;
     margin-right: 20px;
   } 
   .post{
-    height: 50px;
+    height: 35px;
     margin-right: 20px;
     font-size: 16px;
     margin-top: 8px;

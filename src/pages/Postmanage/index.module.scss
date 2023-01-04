@@ -1,0 +1,21 @@
+
+@import '../../styles/base.scss';
+
+.body {
+  display: flex;
+  margin-left: 400px;
+  // width: 100%;
+  // margin-top: 80px;
+  .content{
+    text-align:center;
+    opacity: 0.95;
+    // width: 1600px;
+    .selectarea{
+      width: 1000px;
+    }
+  }
+  
+}
+
+
+

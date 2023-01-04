@@ -20,7 +20,7 @@ export const setNavShow = (data: boolean) => ({
   data
 });
 
-export const setArtSum = (data: number) => ({
+export const setArtSum = (data: any) => ({
   type: SET_ART_SUM,
   data
 });

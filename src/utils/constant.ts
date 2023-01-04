@@ -1,5 +1,6 @@
 // 博客的云环境ID
-export const env = 'hello-cloudbase-4gwpicbvc7a2c471';
+export const env = 'react-blog-admin-8fo571wf24c87f9';
+export const visitorText = '游客不允许修改';
 
 export const source_github = 'https://github.com/lzxjack/react-blog';
 
@@ -72,7 +73,6 @@ export const myDescr = '一只平凡的鸟罢了。';
 export const myEmail = '965555169@qq.com';
 export const adminUid = 'dbee9976b3c14448a06f2006a4795cf2';
 export const QQ = '965555169';
-export const visitorText = '游客不支持修改'
 
 export const myAvatar70 = 'https://img.lzxjack.top/img/202203302156259.webp';
 
