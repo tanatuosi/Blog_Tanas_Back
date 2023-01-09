@@ -2,40 +2,127 @@ import { useSafeState } from 'ahooks';
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import React, { useState, useEffect } from 'react';
 import { storeState } from '../../redux/interface';
-import { Select } from 'antd';
+import { SearchOutlined, FileAddOutlined } from '@ant-design/icons';
+import { Select, Button, Space, Table, Tag, Popconfirm } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
 import { db } from '../../utils/cloudBase';
 import { connect } from 'react-redux';
-import { setArtSum } from '../../redux/actions';
+import { useNavigate } from 'react-router-dom';
 
 import s from './index.module.scss';
 
-interface Props {
-  artSum: any;
-  setArtSum: Function;
+interface DataType {
+  title: string;
+  titleEng: string;
+  category: string;
+  tags: string[];
+  date: string;
 }
 
-interface articlesTitle {
+interface Props {
+}
+
+interface optionsTitle {
   value: string;
   label: string;
 }
 
-const Postmanage: React.FC<Props> = ({ artSum, setArtSum }) => {
+const Postmanage: React.FC<Props> = () => {
 
-  const [page, setPage] = useSafeState(1);
+  const columns: ColumnsType<DataType> = [
+  {
+    title: '标题',
+    dataIndex: 'title',
+    key: 'title',
+  },
+  {
+    title: '英语标题',
+    dataIndex: 'titleEng',
+    key: 'titleEng',
+  },
+  {
+    title: '分类',
+    dataIndex: 'category',
+    key: 'category',
+  },
+  {
+    title: '标签',
+    key: 'tags',
+    dataIndex: 'tags',
+    render: (_, { tags }) => (
+      <>
+        {tags.map((tag) => {
+          let color = tag.length > 5 ? 'geekblue' : 'green';
+          if (tag === 'loser') {
+            color = 'volcano';
+          }
+          return (
+            <Tag color={color} key={tag}>
+              {tag.toUpperCase()}
+            </Tag>
+          );
+        })}
+      </>
+    ),
+  },
+  {
+    title: '日期',
+    dataIndex: 'date',
+    key: 'date',
+  },
+  {
+    title: '编辑',
+    key: 'action',
+    render: (_, record) => (
+      <div>
+        <Popconfirm title="确定编辑？" onConfirm={() => toPostwrite(record)}>
+          <Button style={{ marginRight: 16 }}>编辑</Button>
+        </Popconfirm>
+        <Popconfirm title="确定删除" onConfirm={() => DeleteBlog(record)}>
+          <Button>删除</Button>
+        </Popconfirm>
+      </div>
+    ),
+  },
+];
+
+  const navigate = useNavigate();
+
   const [postData, setPostData] = useState<any>();
-  const [tagsData, setTagsData] = useState<any>();
-  const [articles, setArticles] = useState<articlesTitle[]>();
+  const [categoryData, setCategory] = useState<optionsTitle[]>();
+  const [tagsData, setTagsData] = useState<optionsTitle[]>();
+  const [articlesTitle, setArticlesTitle] = useState<optionsTitle[]>();
   const getNewArticles = () => {
     db.collection('articles')
         .limit(1000)
         .get()
         .then(res => {
           console.log(res);
-          getData(res.data);
+          getTitleData(res.data);
         });
   };
 
-  const getData = (result:any[]) => {
+  const getNewCategory = () => {
+    db.collection('category')
+        .limit(1000)
+        .get()
+        .then(res => {
+          console.log(res);
+          getCategoryData(res.data);
+        });
+  };
+
+  const getNewTagas = () => {
+    db.collection('tags')
+        .limit(1000)
+        .get()
+        .then(res => {
+          console.log(res);
+          getTagsData(res.data);
+        });
+  };
+
+  const getTitleData = (result:any[]) => {
     setPostData(result);
     let articlesData = [];
     for(let i = 0 ; i < result.length ; i++ ){
@@ -46,48 +133,121 @@ const Postmanage: React.FC<Props> = ({ artSum, setArtSum }) => {
         }
       )
     }
-    setArticles(articlesData);
+    setArticlesTitle(articlesData);
+  }
+
+  const getCategoryData = (result:any[]) => {
+    let classesData = [];
+    for(let i = 0 ; i < result.length ; i++ ){
+      classesData.push(
+        {
+          value: result[i].name,
+          label: result[i].name
+        }
+      )
+    }
+    setCategory(classesData);
+  }
+  
+  const getTagsData = (result:any[]) => {
+    let tagsData = [];
+    for(let i = 0 ; i < result.length ; i++ ){
+      tagsData.push(
+        {
+          value: result[i].name,
+          label: result[i].name
+        }
+      )
+    }
+    setTagsData(tagsData);
+  }
+
+  const toPostwrite = (record: any) => {
+    console.log(record);
+    const { title, titleEng, tags, category, date, content } = record;
+    navigate('/postwrite', {
+      state: { 
+         toTitle: title, 
+         toTitleEng: titleEng, 
+         toTags: tags,
+         toCategory: category,
+         toDate: date,
+         tocontent: content,
+     } 
+ });
+  }
+
+  const DeleteBlog = (title: any) => {
+    console.log(title);
   }
 
   useEffect(() => {
     getNewArticles();
+    getNewCategory();
+    getNewTagas();
   },[])
-
-  // const { data, loading } = useRequest(
-  //   () =>
-  //     getPageData({
-  //       dbName: DB.Article,
-  //       sortKey: 'date',
-  //       isAsc: false,
-  //       page,
-  //       size: homeSize
-  //     }),
-  //   {
-  //     retryCount: 3,
-  //     refreshDeps: [page],
-  //     cacheKey: `Section-${DB.Article}-${page}`,
-  //     staleTime
-  //   }
-  // );
 
   return (
     <>
       <div className={s.body}>
         <div className={s.content}>
-          <div className={s.selectarea}>
-            <Select
-              showSearch
-              placeholder="Select a person"
-              optionFilterProp="children"
-              style={{ width: '100%' }}
-              filterOption={(input, option) =>
-                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-              }
-              onChange={() => {
-
-              }}
-              options={articles}
-            />
+          <div className={s.main_table}>
+            <div className={s.selectarea}>
+              <Select
+                className={s.selectOption}
+                showSearch
+                placeholder="Select a person"
+                optionFilterProp="children"
+                style={{ width: '200px' }}
+                filterOption={(input, option) =>
+                  (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                }
+                onChange={() => {
+                }}
+                options={articlesTitle}
+              />
+              <Select
+                className={s.selectOption}
+                showSearch
+                placeholder="Select a category"
+                optionFilterProp="children"
+                style={{ width: '200px' }}
+                filterOption={(input, option) =>
+                  (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                }
+                onChange={() => {
+                }}
+                options={categoryData}
+              />
+              <Select
+                className={s.selectOption}
+                showSearch
+                placeholder="Select some tags"
+                optionFilterProp="children"
+                style={{ width: '200px' }}
+                filterOption={(input, option) =>
+                  (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                }
+                onChange={() => {
+                }}
+                options={tagsData}
+              />
+              <Button type="primary" icon={<SearchOutlined />}>
+                Search
+              </Button>
+              <Button 
+                type="primary" 
+                icon={<FileAddOutlined />} 
+                style={{ marginLeft: '300px' }} 
+                onClick={() => {
+                  navigate('/postwrite');
+                }}>
+                Add
+              </Button>
+            </div>
+            <div className={s.tablearea}>
+              <Table columns={columns} dataSource={postData} pagination={{ position: ['bottomCenter'] }} />
+            </div>
           </div>
         </div>
       </div>
@@ -96,8 +256,7 @@ const Postmanage: React.FC<Props> = ({ artSum, setArtSum }) => {
 };
 
 export default connect(
-  (state: storeState) => ({
-    artSum: state.artSum
+  () => ({
   }),
-{ setArtSum }
+{}
 )(Postmanage);

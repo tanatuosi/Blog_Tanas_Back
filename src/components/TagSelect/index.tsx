@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Radio, Select, SelectProps, Tag } from 'antd';
 import type { CustomTagProps } from 'rc-select/lib/BaseSelect';
+import { db } from '../../utils/cloudBase';
 
 import s from './index.module.scss';
 import { tagsdata } from './constant';
@@ -16,7 +17,7 @@ const tagRender = (props: CustomTagProps) => {
   };
   return (
     <Tag
-      color={value}
+      color="magenta"
       onMouseDown={onPreventMouseDown}
       closable={closable}
       onClose={onClose}
@@ -28,33 +29,121 @@ const tagRender = (props: CustomTagProps) => {
 };
 
 interface Props {
+  type?: string;
+  value?: string | string[];
   className?: string;
-  onChange?: (v: string) => void;
+  onChange: (e: any) => void;
 }
 
 const children: React.ReactNode[] = [];
 
-const options: SelectProps['options'] = [];
-for (let i = 0; i < tagsdata.length; i++) {
-  options.push({
-    value: tagsdata[i].color,
-    label: tagsdata[i].name,
-  });
+const TagSelect: React.FC<Props> = ({ type, className, onChange, value }) => {
+
+  const [categoryData, setCategory] = useState<SelectProps['options']>();
+  const [tagsData, setTagsData] = useState<SelectProps['options']>();
+  const optionspermisson: SelectProps['options'] = [
+  {
+    'value': 'public',
+    'label': 'public',
+    'key' : 1,
+  },
+  {
+    'value': 'admin',
+    'label': 'admin',
+    'key' : 2,
+  },
+  {
+    'value': 'creater',
+    'label': 'creater',
+    'key' : 3,
+  }
+];
+
+const getNewCategory = () => {
+  db.collection('category')
+      .limit(1000)
+      .get()
+      .then(res => {
+        getCategoryData(res.data);
+      });
+};
+
+const getCategoryData = (result:any[]) => {
+  const optionsCategory = [];
+  for(let i = 0 ; i < result.length ; i++ ){
+    optionsCategory.push(
+      {
+        value: result[i].name,
+        label: result[i].name,
+        key : i,
+      }
+    )
+  }
+  setCategory(optionsCategory);
 }
 
-const TagSelect: React.FC<Props> = ({ className, onChange }) => {
+const getNewTagas = () => {
+  db.collection('tags')
+      .limit(1000)
+      .get()
+      .then(res => {
+        getTagsData(res.data);
+      });
+};
 
+const getTagsData = (result:any[]) => {
+  const optionsTags = [];
+  for(let i = 0 ; i < result.length ; i++ ){
+    optionsTags.push(
+      {
+        value: result[i].name,
+        label: result[i].name,
+        key : i,
+      }
+    )
+  }
+  setTagsData(optionsTags);
+}
+
+  useEffect(() => {
+    getNewCategory();
+    getNewTagas();
+  },[])
 
   return (
     <div className={classNames(s.box, className)}>
       <div className={s.select}>
-        <Select
-          mode="multiple"
-          showArrow
-          tagRender={tagRender}
-          style={{ width: '100%' }}
-          options={options}
-        />
+      {
+        type === 'category' ?
+          <Select
+            showArrow
+            value={value}
+            tagRender={tagRender}
+            style={{ width: '100%' }}
+            options={
+              categoryData
+              } 
+            onChange={(value) => {
+              onChange(value);
+            }}
+          />
+        :
+          <Select
+            mode="multiple"
+            value={value}
+            showArrow
+            tagRender={tagRender}
+            style={{ width: '100%' }}
+            options={
+              type === 'tags' 
+                ? tagsData
+                : optionspermisson
+              } 
+            onChange={(value) => {
+              onChange(value);
+            }}
+          />
+      }
       </div>
     </div>
   );

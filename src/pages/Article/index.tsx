@@ -1,19 +1,17 @@
-import { setArtSum } from '../../redux/actions';
 import { connect } from 'react-redux';
-import { message, Select, Popconfirm, notification } from 'antd';
+import { message, Select, notification } from 'antd';
 import { CarryOutOutlined } from '@ant-design/icons';
-import { visitorText, adminUid } from '../../utils/constant';
+import { visitorText } from '../../utils/constant';
 import { storeState } from '../../redux/interface';
 import { db } from '../../utils/cloudBase'
 import s from './index.module.scss';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-interface Props {
-    setArtSum: Function;
-    artSum: any;
-  }
 
-const Article: React.FC<Props> = ({artSum, setArtSum}) => {
+interface Props {
+}
+
+const Article: React.FC<Props> = () => {
     const navigate = useNavigate();
 
         // ———————————标题、时间———————————————
@@ -61,29 +59,32 @@ const Article: React.FC<Props> = ({artSum, setArtSum}) => {
 
     //获取title列表
     const getTiltleOption = (artTitle: any) => {
-        for(let i = 0 ; i < artSum.length ; i++)
-            titleOptiion[0] = {
-                label: artTitle[0].title,
-                value: artTitle[0].id
+        for(let i = 0 ; i < artTitle.length ; i++){
+            titleOptiion[i] = {
+                label: artTitle[i].title,
+                value: artTitle[i].id
             }  
+        }
     }
 
     //获取title列表 这里只是暂时这么写，后面需要补充
     const getTagsOption = (artTitle: any) => {
-        for(let i = 0 ; i < artSum.length ; i++)
-            tagsOptiion[0] = {
-                label: artTitle[0].tags,
-                value: artTitle[0].tags
+        for(let i = 0 ; i < artTitle.length ; i++){
+            tagsOptiion[i] = {
+                label: artTitle[i].tags,
+                value: artTitle[i].tags
             }  
+        }
     }
 
     //获取title列表，这里只是暂时这么写，后面需要补充
     const getClassOption = (artTitle: any) => {
-        for(let i = 0 ; i < artSum.length ; i++)
-            classOptiion[0] = {
-                label: artTitle[0].title,
-                value: artTitle[0].title
+        for(let i = 0 ; i < artTitle.length ; i++){
+            classOptiion[i] = {
+                label: artTitle[i].title,
+                value: artTitle[i].title
             }  
+        }
     }
 
 
@@ -94,7 +95,11 @@ const Article: React.FC<Props> = ({artSum, setArtSum}) => {
         .limit(1000)
         .get()
         .then(res => {
-            setArtSum(res.data);
+            console.log(res.data)
+            getTiltleOption(res.data);
+            getTagsOption(res.data);
+            getClassOption(res.data);
+            console.log(titleOptiion);
         });
     }
 
@@ -108,7 +113,7 @@ const Article: React.FC<Props> = ({artSum, setArtSum}) => {
                 titleEng,
                 content: "",
                 tags: selectTags,
-                classes: selectClasses,
+                categor: selectClasses,
                 date: new Date(date).getTime(),
                 url: `https://lzxjack.top/post?title=${titleEng}`,
             })
@@ -121,7 +126,7 @@ const Article: React.FC<Props> = ({artSum, setArtSum}) => {
                 // getArticlesOrDrafts(dbName);
                 // 转到草稿页/文章页
                 navigate('/postwrite', {
-                     state: { 
+                     state: {   
                         title: title, 
                         titleEng: titleEng, 
                         tags: selectTags,
@@ -141,9 +146,6 @@ const Article: React.FC<Props> = ({artSum, setArtSum}) => {
 
     useEffect(() => {
         getArticle();
-        getTiltleOption(artSum);
-        getTagsOption(artSum);
-        getClassOption(artSum);
     }, [])
     return (
         <div className={s.main}>
@@ -151,7 +153,7 @@ const Article: React.FC<Props> = ({artSum, setArtSum}) => {
                 <Select
                     showSearch
                     placeholder="Select a person"
-                    optionFilterProp="children"
+                    optionFilterProp="label"
                     // onChange={onChange}
                     // onSearch={onSearch}
                     filterOption={(input, option) =>
@@ -192,8 +194,7 @@ const Article: React.FC<Props> = ({artSum, setArtSum}) => {
 
 export default connect(
     (state: storeState) => ({
-        artSum: state.login
     }),
-    { setArtSum }
+    {  }
   )(Article);
   
