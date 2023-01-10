@@ -1,0 +1,32 @@
+
+@import '../../styles/base.scss';
+
+.body {
+  display: flex;
+  .content{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+      .selectarea {
+        display: flex;
+        // flex-direction: column;
+        width: 1200px;
+        height: 1000px;
+        margin-top: 100px;
+        .selectcategory{
+          width: 45%;
+          margin-right: 50px;
+        }
+        .selecttags{
+          width: 45%;
+        }
+      }
+      .tablearea {
+        margin: 20px;
+      }
+    }
+  
+}
+
+
+

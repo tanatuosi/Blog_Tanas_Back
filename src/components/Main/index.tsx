@@ -5,7 +5,7 @@ import s from './index.module.scss';
 const Home = lazy(() => import(/* webpackPrefetch:true */ '../../pages/Home'));
 const Postwrite = lazy(() => import(/* webpackPrefetch:true */ '../../pages/Postwrite'));
 const Postmanage = lazy(() => import(/* webpackPrefetch:true */ '../../pages/Postmanage'));
-// const Classes = lazy(() => import(/* webpackPrefetch:true */ '@/pages/Classes'));
+const Tags = lazy(() => import(/* webpackPrefetch:true */ '../../pages/Tagsmanage'));
 // const Tags = lazy(() => import(/* webpackPrefetch:true */ '@/pages/Tags'));
 // const Gallery = lazy(() => import(/* webpackPrefetch:true */ '@/pages/Gallery'));
 // const Img = lazy(() => import(/* webpackPrefetch:true */ '@/pages/Img'));
@@ -26,8 +26,8 @@ const Main: React.FC = () => {
                 <Route path='/' element={<Home />} />
                 <Route path='/postwrite' element={<Postwrite />} />
                 <Route path='/posts' element={<Postmanage />} />
-                {/* <Route path='classes' element={<Classes />} />
-                <Route path='tags' element={<Tags />} />
+                <Route path='/tags' element={<Tags />} />
+                {/* <Route path='tags' element={<Tags />} />
                 <Route path='gallery' element={<Gallery />} />
                 <Route path='img' element={<Img />} />
                 <Route path='say' element={<Say />} />
