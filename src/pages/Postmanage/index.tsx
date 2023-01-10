@@ -89,9 +89,13 @@ const Postmanage: React.FC<Props> = () => {
   const navigate = useNavigate();
 
   const [postData, setPostData] = useState<any>();
+  const [originPostData, setOriginPostData] = useState<any>();
   const [categoryData, setCategory] = useState<optionsTitle[]>();
   const [tagsData, setTagsData] = useState<optionsTitle[]>();
   const [articlesTitle, setArticlesTitle] = useState<optionsTitle[]>();
+  const [selectcategory, setSelectcategory] = useState<string>();
+  const [selecttags, setSelectTagsData] = useState<string>();
+  const [selectarticlesTitle, setSelectArticlesTitle] = useState<string>();
   const getNewArticles = () => {
     db.collection('articles')
         .limit(1000)
@@ -124,6 +128,7 @@ const Postmanage: React.FC<Props> = () => {
 
   const getTitleData = (result:any[]) => {
     setPostData(result);
+    setOriginPostData(result);
     let articlesData = [];
     for(let i = 0 ; i < result.length ; i++ ){
       articlesData.push(
@@ -181,6 +186,13 @@ const Postmanage: React.FC<Props> = () => {
     console.log(title);
   }
 
+  const filterTable = () => {
+    setPostData(originPostData.filter( (item: any) => {
+        return (!selectarticlesTitle || (selectarticlesTitle && item.title === selectarticlesTitle)) && (!selectcategory || (selectcategory && item.category === selectcategory)) && (!selecttags || (selecttags && item.tags.includes(selecttags)));
+    } ))
+
+  }
+
   useEffect(() => {
     getNewArticles();
     getNewCategory();
@@ -194,6 +206,7 @@ const Postmanage: React.FC<Props> = () => {
           <div className={s.main_table}>
             <div className={s.selectarea}>
               <Select
+                allowClear
                 className={s.selectOption}
                 showSearch
                 placeholder="Select a person"
@@ -202,11 +215,13 @@ const Postmanage: React.FC<Props> = () => {
                 filterOption={(input, option) =>
                   (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                 }
-                onChange={() => {
+                onChange={(value) => {
+                  setSelectArticlesTitle(value);
                 }}
                 options={articlesTitle}
               />
               <Select
+                allowClear
                 className={s.selectOption}
                 showSearch
                 placeholder="Select a category"
@@ -215,11 +230,13 @@ const Postmanage: React.FC<Props> = () => {
                 filterOption={(input, option) =>
                   (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                 }
-                onChange={() => {
+                onChange={(value) => {
+                  setSelectcategory(value);
                 }}
                 options={categoryData}
               />
               <Select
+                allowClear
                 className={s.selectOption}
                 showSearch
                 placeholder="Select some tags"
@@ -228,11 +245,12 @@ const Postmanage: React.FC<Props> = () => {
                 filterOption={(input, option) =>
                   (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                 }
-                onChange={() => {
+                onChange={(value) => {
+                  setSelectTagsData(value);
                 }}
                 options={tagsData}
               />
-              <Button type="primary" icon={<SearchOutlined />}>
+              <Button type="primary" icon={<SearchOutlined />} onClick={filterTable}>
                 Search
               </Button>
               <Button 
@@ -246,7 +264,7 @@ const Postmanage: React.FC<Props> = () => {
               </Button>
             </div>
             <div className={s.tablearea}>
-              <Table columns={columns} dataSource={postData} pagination={{ position: ['bottomCenter'] }} />
+              <Table columns={columns} dataSource={postData} pagination={{ position: ['bottomCenter'], pageSize: 10 }} />
             </div>
           </div>
         </div>

@@ -114,14 +114,16 @@ const getTagsData = (result:any[]) => {
     <div className={classNames(s.box, className)}>
       <div className={s.select}>
       {
-        type === 'category' ?
+        type === 'category' || type === 'permission' ?
           <Select
             showArrow
             value={value}
             tagRender={tagRender}
             style={{ width: '100%' }}
             options={
-              categoryData
+              type === 'category' 
+                ? categoryData
+                : optionspermisson
               } 
             onChange={(value) => {
               onChange(value);
@@ -134,11 +136,7 @@ const getTagsData = (result:any[]) => {
             showArrow
             tagRender={tagRender}
             style={{ width: '100%' }}
-            options={
-              type === 'tags' 
-                ? tagsData
-                : optionspermisson
-              } 
+            options={tagsData} 
             onChange={(value) => {
               onChange(value);
             }}

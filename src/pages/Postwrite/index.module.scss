@@ -7,83 +7,11 @@
   justify-content: center;
   // margin-top: 80px;
   .content{
-    height: 1600px;
+    height: 1200px;
     width: 1450px;
     text-align:center;
     opacity: 0.95;
     // width: 1600px;
-    .details{
-      // height: 500px;
-      height: 650px;
-      display: flex;
-      text-align: left;
-      flex-flow: column nowrap;
-      margin-top: 20px;
-      background-color: white;
-      opacity: 0.95;
-
-      .title{
-        display: flex;
-        text-align: left;
-        margin-top: 20px;
-        margin-left: 150px;
-        width: 1300px;
-        height: 50px;
-        
-        .title_textarea{
-          width: 1100px;
-          font-size: 22px;
-          margin-left: 15px;
-        }
-      }
-
-      .coverdescrible{
-        margin-top: 20px;
-        margin-left: 150px;
-        width: 1300px;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: left;
-        .covercontent{
-          display: flex;
-          flex-flow: column wrap;
-          .cover{
-            margin-bottom: 20px;
-            .ant-upload-list-item {
-              float: left;
-              width: 200px;
-              margin-right: 8px;
-            }
-          }
-          .describle{
-            .describletextarea{
-              width: 1100px;
-              height: 120px;
-            }
-          }
-        }
-      }
-      .tags{
-        margin-top: 20px;
-        margin-left: 150px;
-        width: 1300px;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: left;
-        .tagsselect{
-          width: 1100px;
-          margin-left: 40px;
-
-        }
-
-      }
-      .sort{
-        height: 100px;
-      }
-      .access{
-        height: 100px;
-      }
-    }
   }
   
 }
@@ -122,6 +50,87 @@
     font-size: 16px;
     margin-top: 8px;
   }  
+}
+
+.datapicker{
+  width: 260;
+  margin-left: 38px;
+
+}
+
+.details{
+  // height: 500px;
+  height: 515px;
+  display: flex;
+  text-align: left;
+  flex-flow: column nowrap;
+  // margin-top: 20px;
+  background-color: white;
+  opacity: 0.95;
+
+  .title{
+    display: flex;
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 150px;
+    width: 1300px;
+    height: 50px;
+    
+    .title_textarea{
+      width: 1100px;
+      font-size: 22px;
+      margin-left: 15px;
+    }
+  }
+
+  .firsttitle{
+    margin-top: 0px;
+  }
+
+  .coverdescrible{
+    margin-top: 20px;
+    margin-left: 150px;
+    width: 1300px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: left;
+    .covercontent{
+      display: flex;
+      flex-flow: column wrap;
+      .cover{
+        margin-bottom: 20px;
+        .ant-upload-list-item {
+          float: left;
+          width: 200px;
+          margin-right: 8px;
+        }
+      }
+      .describle{
+        .describletextarea{
+          width: 1100px;
+          height: 120px;
+        }
+      }
+    }
+  }
+  .tags{
+    margin-top: 20px;
+    margin-left: 150px;
+    width: 1300px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: left;
+    .tagsselect{
+      width: 1100px;
+      margin-left: 40px;
+    }
+  }
+  .sort{
+    height: 100px;
+  }
+  .access{
+    height: 100px;
+  }
 }
 
 
